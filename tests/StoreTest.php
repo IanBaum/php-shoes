@@ -39,16 +39,40 @@
 
         function test_setName()
         {
-          //Arrange
-          $name = "Shoeporium";
-          $test_store = new Store($name);
-          $new_name = "Shoes Inc";
-          //Act
-          $test_store->setName($new_name);
-          $result = $test_store->getName();
-          //Assert
-          $this->assertEquals($new_name, $result);
+            //Arrange
+            $name = "Shoeporium";
+            $test_store = new Store($name);
+            $new_name = "Shoes Inc";
+            //Act
+            $test_store->setName($new_name);
+            $result = $test_store->getName();
+            //Assert
+            $this->assertEquals($new_name, $result);
 
         }
+            function save()
+            {
+              $GLOBALS['DB']->exec("INSTERT INTO stores (name, id) VALUES ('{$this->getName()}');");
+              $This->id = $GLOBALS['DB']->lastInsertId();
+            }
+
+            function getAll()
+            {
+                $returned_stores = $GLOBALS['DB']->query("SELECT * FROM stores;");
+                $stores = array();
+                foreach($returned_stores as $store)
+                {
+                    $name = $store['name'];
+                    $id = $store['id'];
+                    $new_store = new Store($name,$id);
+                    array_push($stores, $new_store);
+                }
+                return $stores
+            }
+
+            function deleteAll()
+            {
+                $GLOBALS['DB']->exec("DELETE FROM stores;");
+            }
     }
 ?>
