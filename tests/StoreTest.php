@@ -22,6 +22,32 @@
             //Act
             $result = $test_store->getId();
             //Assert
+            $this->assertEquals($id, $result);
+        }
+
+        function test_getName()
+        {
+            //Arrange
+            $name = "Shoeporium";
+            $test_store = new Store($name);
+            //Act
+            $result = $test_store->getName();
+            //Assert
+            $this->assertEquals($name, $result);
+
+        }
+
+        function test_setName()
+        {
+          //Arrange
+          $name = "Shoeporium";
+          $test_store = new Store($name);
+          $new_name = "Shoes Inc";
+          //Act
+          $test_store->setName($new_name);
+          $result = $test_store->getName();
+          //Assert
+          $this->assertEquals($new_name, $result);
 
         }
     }
