@@ -31,10 +31,10 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        $static function getAll()
+        static function getAll()
         {
             $returned_brands = $GLOBALS['DB']->query("SELEcT * FROM brands;");
-            $stores = [];
+            $brands = array();
             foreach($returned_brands as $brand){
                 $name = $brand['name'];
                 $id = $brand['id'];
@@ -72,7 +72,7 @@
         function update($new_name)
         {
             $GLOBALS['DB']->exec("UPDATE brands SET name = '{new_name}' WHERE id = {$this->getId()};");
-            $this->setName($new_name;)
+            $this->setName($new_name);
         }
     }
 ?>
