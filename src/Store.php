@@ -54,23 +54,21 @@
         }
 
         static function find($search_id)
-        {
-            $found_store = null;
-            $stores = Store::getAll();
-            foreach($stores as $store)
-            {
-                $store_id = $store->getId();
-                if($store_id = $searchId)
-                {
-                    $found_store = $store;
-                }
-            }
-            return $found_store;
-        }
+       {
+           $found_store = null;
+           $stores = Store::getAll();
+           foreach ($stores as $store) {
+               $store_id = $store->getId();
+               if ($store_id == $search_id) {
+                   $found_store = $store;
+               }
+           }
+           return $found_store;
+       }
 
         function update($new_name)
         {
-            $GLOBALS['DB']->exec("UPDATE stores SET name = '{new_name}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE stores SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
         }
 
@@ -95,12 +93,13 @@
                 array_push($brands, $new_brand);
             }
             return $brands;
+        }
 
 
-            function deleteBrand($brand_id)
-            {
-                $GLOBALS['DB']->exec("DELETE FROM brands_stores WHERE store_id = {$this->getId()} AND brand_id = $brand_id;");
-            }
+        function deleteBrand($brand_id)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores WHERE store_id = {$this->getId()} AND brand_id = $brand_id;");
+        }
 
     }
 ?>

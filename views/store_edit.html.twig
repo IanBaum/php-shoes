@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title>Shoes</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>edit {{store.getName}}</h2>
+      <form action="/stores/{{store.getId}}" method="post">
+        <input name="_method" type="hidden" value="patch">
+        <label for="name">Store Name:</label>
+        <input id="name" type="text" name="new_store_name">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </form>
+</html>

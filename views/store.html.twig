@@ -8,6 +8,8 @@
   <body>
     <div class="container">
       <h1>{{store.getName}}</h1>
+      <a href="/store/{{store.getId}}/edit"><h3>Edit</h3></a>
+      <a href="/store/{{store.getId}}/delete"><h3>Delete</h3></a>
       {% if brands is not empty %}
       <h2>List of Brands:</h2>
         {% for brand in brands %}
