@@ -13,6 +13,12 @@
 
     class StoreTest extends PHPUnit_Framework_TestCase
     {
+
+        protected function teardown()
+        {
+            Store::deleteAll();
+        }
+
         function test_getId()
         {
             //Arrange
@@ -53,7 +59,47 @@
 
         function test_save()
         {
-            
+            //Arrange
+            $name = "Shoeporium";
+            $test_store = new Store($name);
+            $test_store->save();
+            //Act
+            $result = Store::getAll();
+            //Assert
+            $this->assertEquals($test_store, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $name = "Shoeporium";
+            $test_store = new Store($name);
+            $test_store->save();
+
+            $name2 = "ShoePlace";
+            $test_store2 = new Store($name2);
+            $test_store2->save();
+            //Act
+            $result = Store::getAll();
+            //Assert
+            $this->assertEquals([$test_store, $test_store2], $result);
+        }
+
+        function test_deleteAll()
+        {
+          //Arrange
+          $name = "Shoeporium";
+          $test_store = new Store($name);
+          $test_store->save();
+
+          $name2 = "ShoePlace";
+          $test_store2 = new Store($name2);
+          $test_store2->save();
+          //Act
+          Store::deleteAll();
+          $result = Store::getAll();
+          //Assert
+          $this->assertEquals([], $result);
         }
 
     }

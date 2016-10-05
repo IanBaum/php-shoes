@@ -26,23 +26,22 @@
 
         function save()
         {
-          $GLOBALS['DB']->exec("INSTERT INTO stores (name, id) VALUES ('{$this->getName()}');");
-          $This->id = $GLOBALS['DB']->lastInsertId();
+          $GLOBALS['DB']->exec("INSERT INTO stores (name) VALUES ('{$this->getName()}');");
+          $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         static function getAll()
-        {
-            $returned_stores = $GLOBALS['DB']->query("SELECT * FROM stores;");
-            $stores = array();
-            foreach($returned_stores as $store)
-            {
-                $name = $store['name'];
-                $id = $store['id'];
-                $new_store = new Store($name,$id);
-                array_push($stores, $new_store);
-            }
-            return $stores
-        }
+       {
+           $returned_stores = $GLOBALS['DB']->query("SELECT * FROM stores;");
+           $stores = array();
+           foreach($returned_stores as $store) {
+               $name = $store['name'];
+               $id = $store['id'];
+               $new_store = new Store($name, $id);
+               array_push($stores, $new_store);
+           }
+           return $stores;
+       }
 
         static function deleteAll()
         {
