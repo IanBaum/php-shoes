@@ -7,17 +7,11 @@
   </head>
   <body>
     <div class="container">
-      <h1>Stores</h1>
-      {% if stores is not empty %}
-      <h2>List of Stores:</h2>
-        {% for store in stores %}
-          <a href="/store/{{store.getId}}"><h3>{{store.getName}}</h3></a>
+      <h1>{{store.getName}}</h1>
+      {% if brands is not empty %}
+      <h2>List of Brands:</h2>
+        {% for brand in brands %}
+          <a href="/brand/{{brand.getId}}"><h3>{{brand.getName}}</h3></a>
         {% endfor %}
       {% endif %}
-      <h2>Add a Store</h2>
-      <form action="/stores" method="post">
-        <label for="name">Store Name:</label>
-        <input id="name" type="text" name="store_name">
-        <button type="submit" class="btn btn-primary">Add Store</button>
-      </form>
 </html>

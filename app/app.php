@@ -33,7 +33,7 @@
     });
 
     $app->get("/store/{store_id}", function($store_id) use($app){
-        return $app['twig']->render('store.html.twig', array('stores' => Store::getAll()));
+        return $app['twig']->render('store.html.twig', array('store'=>Store::find($store_id), 'brands'=>Brand::getAll(), 'store_brands'=>Store::find($store_id)->getBrands()));
     });
 
     //BRANDS
