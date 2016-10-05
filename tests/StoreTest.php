@@ -87,6 +87,40 @@
 
         function test_deleteAll()
         {
+            //Arrange
+            $name = "Shoeporium";
+            $test_store = new Store($name);
+            $test_store->save();
+
+            $name2 = "ShoePlace";
+            $test_store2 = new Store($name2);
+            $test_store2->save();
+            //Act
+            Store::deleteAll();
+            $result = Store::getAll();
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
+        function test_update()
+        {
+          //Arrange
+          $name = "Shoeporium";
+          $test_store = new Store($name);
+          $test_store->save();
+          $new_name = "Shoeify";
+
+          //Act
+          $test_store->update($new_name);
+          $result = $test_store->getName();
+
+          //Assert
+          $this->assertEquals($new_name, $result);
+
+        }
+
+        function test_delete()
+        {
           //Arrange
           $name = "Shoeporium";
           $test_store = new Store($name);
@@ -95,11 +129,13 @@
           $name2 = "ShoePlace";
           $test_store2 = new Store($name2);
           $test_store2->save();
+
           //Act
-          Store::deleteAll();
+          $test_store->delete();
           $result = Store::getAll();
+
           //Assert
-          $this->assertEquals([], $result);
+          $this->assertEquals([$test_store2], $result);
         }
 
     }
