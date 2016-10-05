@@ -48,6 +48,31 @@
             $GLOBALS['DB']->exec("DELETE FROM stores;");
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
+        }
+
+        static function find($search_id)
+        {
+            $found_store = null;
+            $stores = Store::getAll();
+            foreach($stores as $store)
+            {
+                $store_id = $store->getId();
+                if($store_id = $searchId)
+                {
+                    $found_store = $store;
+                }
+            }
+            return $found_store;
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE stores SET name = '{new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
 
     }
 ?>
