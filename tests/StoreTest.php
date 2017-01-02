@@ -5,6 +5,7 @@
     */
 
     require_once "src/Store.php";
+    require_once "src/Brand.php";
 
     $server = 'mysql:host=localhost:8889;dbname=shoes_test';
     $username = 'root';
@@ -17,6 +18,7 @@
         protected function teardown()
         {
             Store::deleteAll();
+            Brand::deleteAll();
         }
 
         function test_getId()
@@ -138,34 +140,19 @@
           $this->assertEquals([$test_store2], $result);
         }
 
-        function test_addBrand()
-        {
-            //ARRANGE
-            $brandName = "Nike";
-            $id = null;
-            $test_brand = new Brand($id, $brandName);
-            $test_brand->save();
-            $storeName = "Shoeporium";
-            $test_store = new Store($id, $storeName);
-            $test_store->save();
-            // Act
-            $test_store->addBrand($test_brand);
-            // Assert
-            $this->assertEquals([$test_brand], $test_store->getBrands());
-        }
+
         function test_getBrands()
         {
             //ARRANGE
-            $id = null;
             $storeName = "Shoeporium";
-            $test_store = new Store($id, $storeName);
+            $test_store = new Store($storeName);
             $test_store->save();
             $brandName = "Nike";
-            $test_brand = new Brand($id, $brandName);
+            $test_brand = new Brand($brandName);
             $test_brand->save();
             $test_store->addBrand($test_brand);
             $brandName2 = "Reebok";
-            $test_brand2 = new Brand($id, $brandName2);
+            $test_brand2 = new Brand($brandName2);
             $test_brand2->save();
             $test_store->addBrand($test_brand2);
             // Act
